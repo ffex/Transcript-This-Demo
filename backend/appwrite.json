@@ -1,0 +1,34 @@
+{
+    "projectId": "6357bd837483b700359d",
+    "projectName": "TranscriptThis",
+    "functions": [
+        {
+            "$id": "6357bf62e52264d2ba74",
+            "name": "Transcript Youtube",
+            "runtime": "python-3.9",
+            "path": "functions/Transcript Youtube",
+            "entrypoint": "src/index.py",
+            "ignore": [
+                "__pypackages__"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "6357e66d0aa97107a17f",
+            "name": "testFunction",
+            "runtime": "python-3.9",
+            "path": "functions/testFunction",
+            "entrypoint": "src/index.py",
+            "ignore": [
+                "__pypackages__"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
