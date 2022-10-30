@@ -3,3 +3,7 @@ body{
     background-color: var(--surface-ground);
 
 }
+
+.p-card .p-card-content{
+    padding:0px !important;
+}

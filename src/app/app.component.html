@@ -1,9 +1,8 @@
 <div class="grid">
   <div class="col-12">
-    <p-menubar [model]="items">
-      <ng-template pTemplate="start">
-        <!-- <img src="assets/showcase/images/primeng.svg" height="40" class="mr-2"> -->
-        Transcript this
+    <p-menubar [model]="items" >
+      <ng-template pTemplate="start" class=" flex vertical-align-middle">
+         <img src="assets/logo.svg" height="40" class="mr-2"> 
       </ng-template>
       <ng-template pTemplate="end">
 
@@ -12,6 +11,13 @@
     </p-menubar>
   </div>
   <div class="col-8 col-offset-2">
-    <app-tt-tab-view></app-tt-tab-view>
+    <router-outlet></router-outlet>
+
+    <!-- <app-tt-tab-view></app-tt-tab-view> -->
   </div>
+</div>
+<div class="layout-footer">
+  <p-card [styleClass]="'py-0'"> Made with ❤️ and 
+    <img src="assets/built-with-appwrite.svg" height="30" style="position: relative;top: 10px;">
+  by <a href="https://github.com/ffex" target="_blank"><i class="pi pi-github"></i>ffex</a></p-card>
 </div>

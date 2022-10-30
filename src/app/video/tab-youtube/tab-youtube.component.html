@@ -1,0 +1,27 @@
+<div class="field grid">
+    <label for="firstname1">Youtube link</label>
+    <div class="col-12">
+
+        <div class="p-inputtext-sm">
+            <input type="text" [(ngModel)]="urlText" class="w-full" pInputText placeholder="https://www.youtube.com/...">
+        </div>
+    </div>
+</div>
+<div class="grid">
+    <div class="col-8 col-offset-2 flex justify-content-center">
+        <youtube-player *ngIf="videoId != undefined" [videoId]="videoId"> </youtube-player>
+    </div>
+    <div class="col-8 col-offset-2 text-justify" *ngIf="this.inLoading">
+        <p-card styleClass="surface-50 shadow-4">
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i> Trascripting for you...
+        </p-card>
+    </div>
+    <div class="col-8 col-offset-2 text-justify" *ngIf="!this.inLoading && transctiptionText!==''">
+        <p-card styleClass="surface-50 shadow-4">
+            {{transctiptionText}}
+        </p-card>
+    </div>
+    <div class="col-2 col-offset-10 flex justify-content-end">
+        <button pButton type="button" label="Transcript" (click)="transcript()" ></button>
+    </div>
+</div>

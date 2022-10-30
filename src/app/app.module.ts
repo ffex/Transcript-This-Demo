@@ -9,15 +9,22 @@ import {TabViewModule} from 'primeng/tabview';
 import {CardModule} from 'primeng/card';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
-import { TtTabViewComponent } from './tt-tab-view/tt-tab-view.component';
-import { TtYoutubeComponent } from './tt-tab-view/tt-youtube/tt-youtube.component';
+
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { VideoComponent } from './video/video.component';
+import { AboutComponent } from './about/about.component';
+import { TabYoutubeComponent } from './video/tab-youtube/tab-youtube.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TtTabViewComponent,
-    TtYoutubeComponent
+    HomeComponent,
+    VideoComponent,
+    AboutComponent,
+    TabYoutubeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +34,8 @@ import { TtYoutubeComponent } from './tt-tab-view/tt-youtube/tt-youtube.componen
     CardModule,
     InputTextModule,
     ButtonModule,
+    YouTubePlayerModule,
+    FormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]

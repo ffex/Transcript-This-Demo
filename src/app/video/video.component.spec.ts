@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TtTabViewComponent } from './tt-tab-view.component';
+import { VideoComponent } from './video.component';
 
-describe('TtTabViewComponent', () => {
-  let component: TtTabViewComponent;
-  let fixture: ComponentFixture<TtTabViewComponent>;
+describe('VideoComponent', () => {
+  let component: VideoComponent;
+  let fixture: ComponentFixture<VideoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TtTabViewComponent ]
+      declarations: [ VideoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TtTabViewComponent);
+    fixture = TestBed.createComponent(VideoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

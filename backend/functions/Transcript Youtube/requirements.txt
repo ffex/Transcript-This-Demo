@@ -1,2 +1,4 @@
 appwrite
 pytube
+deepgram-sdk
+asyncio

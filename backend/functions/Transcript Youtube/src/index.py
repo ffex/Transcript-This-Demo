@@ -2,6 +2,9 @@ from appwrite.client import Client
 from pytube import YouTube
 from io import BytesIO
 from appwrite.input_file import InputFile
+from deepgram import Deepgram
+import json
+import asyncio
 
 # You can remove imports of services you don't use
 from appwrite.services.account import Account
@@ -28,8 +31,9 @@ from appwrite.services.users import Users
 """
 
 def main(req, res):
+  response="nothing"
   client = Client()
-
+  print("start program")
   # You can remove services you don't use
   account = Account(client)
   avatars = Avatars(client)
@@ -52,7 +56,7 @@ def main(req, res):
       .set_self_signed(True)
     )
   
-  payload = req.payload
+  payload = json.loads(req.payload)
   
 
   
@@ -64,15 +68,38 @@ def main(req, res):
   else:
     dgsk = req.variables.get('DEEPGRAM_SECRET_KEY')
 
-  salvaFileAudio(storage,payload)
+  mime_type='audio/mp4'
+  bytesAudio = salvaFileAudio(storage,payload["videoUrl"],mime_type)
+  try:
+    source = {
+      'buffer': bytesAudio,
+      'mimetype': mime_type,
+    }
+    
+    response= asyncio.run(callDeepgram(dgsk,source))
+  except Exception as e:
+    print("error")
+    print(e)
+
   return res.json({
     "areDevelopersAwesome": True,
     "payload" : payload,
-    "bucketList:":storage.list_buckets()
+    "deepgramResponse":response,
   })  
+async def callDeepgram(dgsk,source):
+  deepgram = Deepgram(dgsk)
+  response = await asyncio.create_task(
+    deepgram.transcription.prerecorded(
+      source,
+      {
+        'punctuate': True
+      }
+    )
+  )
+  return response
 
 
-def salvaFileAudio(storage,video_link=None):
+def salvaFileAudio(storage,video_link, mime_type):
   try:
     buffer = BytesIO()
     video = YouTube(video_link)
@@ -91,8 +118,9 @@ def salvaFileAudio(storage,video_link=None):
     #print(pathAudio)
     #print(InputFile.from_bytes(buffer.read()))
     
-    storage.create_file("6357c15e76b7c1073831","unique()", InputFile.from_bytes(buffer.getvalue(),"audio.mp4",'audio/mp4'))
+    #storage.create_file("6357c15e76b7c1073831","unique()", InputFile.from_bytes(buffer.getvalue(),"audio.mp4",mime_type))
     print('Download Completed!')
+    return buffer.getvalue()
 
   except Exception as e:
     print("Connection Error")  # to handle exception
