@@ -1,28 +1,29 @@
 # Transcript Youtube
 
-Welcome to the documentation of this function 👋 We strongly recommend keeping this file in sync with your function's logic to make sure anyone can easily understand your function in the future. If you don't need documentation, you can remove this file.
+Welcome to the documentation of this function 👋
 
 ## 🤖 Documentation
 
-Simple function similar to typical "hello world" example, but instead, we return a simple JSON that tells everyone how awesome developers are.
-
-<!-- Update with your description, for example 'Create Stripe payment and return payment URL' -->
+Return a transcript of a Youtube video from the link.
 
 _Example input:_
 
-This function expects no input
-
-<!-- If input is expected, add example -->
+```json
+{
+ videoUrl: "https://www.youtube.com/..." 
+}
+```
 
 _Example output:_
 
-<!-- Update with your expected output -->
-
 ```json
 {
- "areDevelopersAwesome": true
+    "result": "OK",
+    "deepgramResponse": ...,
 }
 ```
+
+For detailed deepgramResponse check [Deepgram Documentations](https://developers.deepgram.com/documentation/)
 
 ## 📝 Environment Variables
 
@@ -30,7 +31,7 @@ List of environment variables used by this cloud function:
 
 - **APPWRITE_FUNCTION_ENDPOINT** - Endpoint of Appwrite project
 - **APPWRITE_FUNCTION_API_KEY** - Appwrite API Key
-<!-- Add your custom environment variables -->
+- **DEEPGRAM_SECRET_KEY** - Deepgram Secret API Key
 
 ## 🚀 Deployment
 

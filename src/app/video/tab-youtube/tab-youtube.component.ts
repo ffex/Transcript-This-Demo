@@ -29,7 +29,7 @@ export class TabYoutubeComponent implements OnInit {
       this.inLoading=false;
 
       console.log(error); // Failure
-      this.transctiptionText="Errorsss"
+      this.transctiptionText="There is some errors. Try later."
   });
     
   }

@@ -6,17 +6,6 @@ from deepgram import Deepgram
 import json
 import asyncio
 
-# You can remove imports of services you don't use
-from appwrite.services.account import Account
-from appwrite.services.avatars import Avatars
-from appwrite.services.databases import Databases
-from appwrite.services.functions import Functions
-from appwrite.services.health import Health
-from appwrite.services.locale import Locale
-from appwrite.services.storage import Storage
-from appwrite.services.teams import Teams
-from appwrite.services.users import Users
-
 """
   'req' variable has:
     'headers' - object with request headers
@@ -33,18 +22,7 @@ from appwrite.services.users import Users
 def main(req, res):
   response="nothing"
   client = Client()
-  print("start program")
-  # You can remove services you don't use
-  account = Account(client)
-  avatars = Avatars(client)
-  database = Databases(client)
-  functions = Functions(client)
-  health = Health(client)
-  locale = Locale(client)
-  storage = Storage(client)
-  teams = Teams(client)
-  users = Users(client)
-
+  
   if not req.variables.get('APPWRITE_FUNCTION_ENDPOINT') or not req.variables.get('APPWRITE_FUNCTION_API_KEY'):
     print('Environment variables are not set. Function cannot use Appwrite SDK.')
   else:
@@ -58,10 +36,6 @@ def main(req, res):
   
   payload = json.loads(req.payload)
   
-
-  
-
-  #check su variabile DEEPGRAM_SECRET_KEY
   dgsk = ''
   if not req.variables.get('DEEPGRAM_SECRET_KEY') :
     print('Deepgram secret key variable are not set. ')
@@ -69,7 +43,10 @@ def main(req, res):
     dgsk = req.variables.get('DEEPGRAM_SECRET_KEY')
 
   mime_type='audio/mp4'
-  bytesAudio = salvaFileAudio(storage,payload["videoUrl"],mime_type)
+
+  bytesAudio = getAudioFile(payload["videoUrl"],mime_type)
+
+  #Request to deepgram
   try:
     source = {
       'buffer': bytesAudio,
@@ -78,14 +55,14 @@ def main(req, res):
     
     response= asyncio.run(callDeepgram(dgsk,source))
   except Exception as e:
-    print("error")
+    print("Unable to transcript")
     print(e)
 
   return res.json({
-    "areDevelopersAwesome": True,
-    "payload" : payload,
+    "result": "OK",
     "deepgramResponse":response,
-  })  
+  })
+
 async def callDeepgram(dgsk,source):
   deepgram = Deepgram(dgsk)
   response = await asyncio.create_task(
@@ -98,30 +75,18 @@ async def callDeepgram(dgsk,source):
   )
   return response
 
-
-def salvaFileAudio(storage,video_link, mime_type):
+def getAudioFile(video_link, mime_type):
   try:
     buffer = BytesIO()
     video = YouTube(video_link)
-    # filtering the audio. File extension can be mp4/webm
-    # You can see all the available streams by print(video.streams)
-    print('Step1!')
+
     audio = video.streams.filter(only_audio=True, file_extension='mp4').first()
-    print('Step2!')
+    
     audio.stream_to_buffer(buffer)
     buffer.seek(0)
-    #testRead = buffer.read()
-    #print(testRead)
-    print('Step3!')
     
-    #pathAudio=audio.download(None,"audio.mp4")
-    #print(pathAudio)
-    #print(InputFile.from_bytes(buffer.read()))
-    
-    #storage.create_file("6357c15e76b7c1073831","unique()", InputFile.from_bytes(buffer.getvalue(),"audio.mp4",mime_type))
-    print('Download Completed!')
     return buffer.getvalue()
 
   except Exception as e:
-    print("Connection Error")  # to handle exception
+    print("Unable to get the audio file")  # to handle exception
     print(e)

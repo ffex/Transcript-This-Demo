@@ -1,4 +1,46 @@
-# TranscriptThisDemo
+![Transcript This](cover.png)
+
+# 💬 Transcript This
+
+> Helping people to trascript video.
+
+Transcript This is a webapp usefull to transcript instantly a video from youtube.
+The only thing to do is to paste a youtube video link and wait the transcription!
+
+This application came into existance as a way to showcase amazing project that can be built using [Appwrite](https://appwrite.io/).
+
+
+## 🧰 Tech Stack
+
+- [Appwrite](https://appwrite.io/)
+- [Python](https://www.python.org/)
+- [Pytube](https://pytube.io/en/latest/)
+- [Deepgram](https://deepgram.com/)
+- [Angular](https://angular.io/)
+- [PrimeNG](https://www.primefaces.org/primeng/)
+
+## 🛠️ Setup
+
+1. Setup [Appwrite](https://appwrite.io/) 1.0.3
+2. Create project with ID `Transcriptions`
+3. Use [Appwrite CLI](https://appwrite.io/docs/command-line) and run `appwrite deploy function --all`, all inside `backend` folder
+4. Create `Internal` API key (give all scopes), and configure `APPWRITE_FUNCTION_API_KEY` and `APPWRITE_FUNCTION_ENDPOINT` on `Transcript Youtube` function
+5. Configure `DEEPGRAM_SECRET_KEY` with the Deepgram API key
+
+## 🏠 Development
+
+1. Install dependencies `npm install`
+2. Start Angular server `ng serve`
+
+## 🖼️ Screenshots
+
+![Screenshot](screenshots/ss1.png)
+![Screenshot](screenshots/ss2.png)
+![Screenshot](screenshots/ss3.png)
+![Screenshot](screenshots/ss4.png)
+![Screenshot](screenshots/ss5.png)
+
+## 🤖 Angular Generated Documentation
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 
