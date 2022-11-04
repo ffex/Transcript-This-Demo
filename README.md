@@ -22,10 +22,19 @@ This application came into existance as a way to showcase amazing project that c
 ## 🛠️ Setup
 
 1. Setup [Appwrite](https://appwrite.io/) 1.0.3
-2. Create project with ID `Transcriptions`
-3. Use [Appwrite CLI](https://appwrite.io/docs/command-line) and run `appwrite deploy function --all`, all inside `backend` folder
-4. Create `Internal` API key (give all scopes), and configure `APPWRITE_FUNCTION_API_KEY` and `APPWRITE_FUNCTION_ENDPOINT` on `Transcript Youtube` function
-5. Configure `DEEPGRAM_SECRET_KEY` with the Deepgram API key
+2. Create project with ID `transcriptions`
+3. In Appwrite project page click on `Add Platform` and add a  `Web App` to avoid CORS errors.
+4. Use [Appwrite CLI](https://appwrite.io/docs/command-line), all inside `backend` folder:
+    
+    4.1. (Optional, default: "`http://localhost/v1`") Setup Appwrite Endpoint: `appwrite client --endpoint [YOUR_APPWRITE_ENDPOINT]`
+
+    4.2. Login to the server `appwrite login`, put your email and password.
+
+    4.3. Run `appwrite deploy function --all`.
+5. Create `Internal` API key (give all scopes), and configure `APPWRITE_FUNCTION_API_KEY` and `APPWRITE_FUNCTION_ENDPOINT` on "TranscriptYoutube" function
+6. Configure `DEEPGRAM_SECRET_KEY` with the Deepgram API key on "TranscriptYoutube" function.
+7. Assign permissions `any` on "TranscriptYoutube" function.
+8. Configure Angular Service: in `src/app/services/appwrite.service.ts` set `APPWRITE_ENDPOINT` var.
 
 ## 🏠 Development
 
